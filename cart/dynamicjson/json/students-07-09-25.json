@@ -1,0 +1,77 @@
+[
+    {
+        "student_name": "Aarav Sharma",
+        "age": "14",
+        "city": "Delhi"
+    },
+    {
+        "student_name": "Priya Mehta",
+        "age": "15",
+        "city": "Mumbai"
+    },
+    {
+        "student_name": "Rohit Verma",
+        "age": "16",
+        "city": "Kolkata"
+    },
+    {
+        "student_name": "Sneha Patel",
+        "age": "13",
+        "city": "Ahmedabad"
+    },
+    {
+        "student_name": "Vikram Singh",
+        "age": "17",
+        "city": "Jaipur"
+    },
+    {
+        "student_name": "Kiran Das",
+        "age": "15",
+        "city": "Bangalore"
+    },
+    {
+        "student_name": "Neha Reddy",
+        "age": "14",
+        "city": "Hyderabad"
+    },
+    {
+        "student_name": "Ankit Kumar",
+        "age": "16",
+        "city": "Chennai"
+    },
+    {
+        "student_name": "Simran Kaur",
+        "age": "15",
+        "city": "Amritsar"
+    },
+    {
+        "student_name": "Aditya Joshi",
+        "age": "13",
+        "city": "Pune"
+    },
+    {
+        "student_name": "Riya Kapoor",
+        "age": "14",
+        "city": "Lucknow"
+    },
+    {
+        "student_name": "Manish Yadav",
+        "age": "16",
+        "city": "Patna"
+    },
+    {
+        "student_name": "Pooja Nair",
+        "age": "15",
+        "city": "Kochi"
+    },
+    {
+        "student_name": "Arjun Malhotra",
+        "age": "17",
+        "city": "Delhi"
+    },
+    {
+        "student_name": "Divya Mishra",
+        "age": "14",
+        "city": "Bhopal"
+    }
+]

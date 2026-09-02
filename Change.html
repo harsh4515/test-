@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Quick Question... ❤️</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #0f0c20;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Animated background gradient orbs */
+    .bg-glow {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,75,145,0.4) 0%, rgba(0,0,0,0) 70%);
+      top: 15%;
+      left: 10%;
+      filter: blur(40px);
+      animation: floatGlow 8s infinite alternate ease-in-out;
+    }
+    .bg-glow-2 {
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,118,118,0.3) 0%, rgba(0,0,0,0) 70%);
+      bottom: 10%;
+      right: 10%;
+      filter: blur(50px);
+      animation: floatGlow 10s infinite alternate-reverse ease-in-out;
+    }
+
+    @keyframes floatGlow {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(30px, -40px) scale(1.15); }
+    }
+
+    /* Glassmorphism Card Container */
+    .card {
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 45px 32px;
+      border-radius: 28px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
+      position: relative;
+      z-index: 10;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      background: rgba(255, 75, 145, 0.15);
+      border: 1px solid rgba(255, 75, 145, 0.3);
+      color: #ff76a0;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    h1 {
+      color: #ffffff;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      letter-spacing: -0.3px;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+    }
+
+    button {
+      flex: 1;
+      padding: 16px 20px;
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .btn-yes {
+      background: linear-gradient(135deg, #ff4b91 0%, #ff7676 100%);
+      color: #ffffff;
+      box-shadow: 0 8px 20px rgba(255, 75, 145, 0.35);
+    }
+    .btn-yes:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 25px rgba(255, 75, 145, 0.5);
+    }
+
+    .btn-no {
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .btn-no:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .response-card {
+      display: none;
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    .response-card .icon {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    .response-card h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    .response-card p {
+      margin-bottom: 0;
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.85); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-glow"></div>
+  <div class="bg-glow-2"></div>
+
+  <div class="card">
+    <div id="quiz-content">
+      <span class="badge">A MESSAGE FOR YOU</span>
+      <h1>I'm Really Sorry... ❤️</h1>
+      <p>I know I made a mistake, and I'm genuinely sorry for blocking you. I want to make things right and give us a fresh start. Will you meet me this Saturday?</p>
+      
+      <form id="responseForm" action="YOUR_FORMSPREE_ENDPOINT" method="POST">
+        <input type="hidden" name="answer" id="answerInput" value="">
+        <div class="btn-group">
+          <button type="button" class="btn-yes" onclick="submitChoice('YES')">Yes, let's meet ✨</button>
+          <button type="button" class="btn-no" onclick="submitChoice('NO')">Not this time 💭</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="msg-yes" class="response-card">
+      <div class="icon">🥰</div>
+      <h2>Thank You!</h2>
+      <p>I can't wait to see you this Saturday and make it up to you! ❤️</p>
+    </div>
+
+    <div id="msg-no" class="response-card">
+      <div class="icon">🤍</div>
+      <h2>I Understand</h2>
+      <p>No problem at all! Take all the time you need. Next time ❤️</p>
+    </div>
+  </div>
+
+  <script>
+    function submitChoice(choice) {
+      document.getElementById('answerInput').value = choice;
+      
+      const form = document.getElementById('responseForm');
+      const formData = new FormData(form);
+
+      // Send choice to Formspree email
+      if (form.action && !form.action.includes("YOUR_FORMSPREE_ENDPOINT")) {
+        fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+      }
+
+      // Hide active screen and show corresponding answer screen
+      document.getElementById('quiz-content').style.display = 'none';
+      if (choice === 'YES') {
+        document.getElementById('msg-yes').style.display = 'block';
+      } else {
+        document.getElementById('msg-no').style.display = 'block';
+      }
+    }
+  </script>
+
+</body>
+</html>

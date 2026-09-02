@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Quick Question... ❤️</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #0f0c20;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+    .bg-glow {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,75,145,0.4) 0%, rgba(0,0,0,0) 70%);
+      top: 15%;
+      left: 10%;
+      filter: blur(40px);
+      animation: floatGlow 8s infinite alternate ease-in-out;
+    }
+    .bg-glow-2 {
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,118,118,0.3) 0%, rgba(0,0,0,0) 70%);
+      bottom: 10%;
+      right: 10%;
+      filter: blur(50px);
+      animation: floatGlow 10s infinite alternate-reverse ease-in-out;
+    }
+    @keyframes floatGlow {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(30px, -40px) scale(1.15); }
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 40px 28px;
+      border-radius: 28px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
+      position: relative;
+      z-index: 10;
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      background: rgba(255, 75, 145, 0.15);
+      border: 1px solid rgba(255, 75, 145, 0.3);
+      color: #ff76a0;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+    h1 { color: #ffffff; font-size: 26px; font-weight: 700; margin-bottom: 14px; }
+    p { color: rgba(255, 255, 255, 0.75); font-size: 15px; line-height: 1.6; margin-bottom: 25px; }
+    .btn-group { 
+      display: flex; 
+      flex-direction: column;
+      gap: 12px; 
+      justify-content: center; 
+    }
+    button {
+      width: 100%;
+      padding: 14px 20px;
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .btn-yes {
+      background: linear-gradient(135deg, #ff4b91 0%, #ff7676 100%);
+      color: #ffffff;
+      box-shadow: 0 8px 20px rgba(255, 75, 145, 0.35);
+    }
+    .btn-yes:hover { transform: translateY(-2px) scale(1.01); }
+    
+    .btn-thinking {
+      background: rgba(255, 193, 7, 0.15);
+      color: #ffca28;
+      border: 1px solid rgba(255, 193, 7, 0.3);
+    }
+    .btn-thinking:hover { background: rgba(255, 193, 7, 0.25); transform: translateY(-2px); }
+
+    .btn-no {
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .btn-no:hover { background: rgba(255, 255, 255, 0.15); color: #ffffff; }
+
+    .btn-custom {
+      background: rgba(0, 198, 255, 0.15);
+      color: #00c6ff;
+      border: 1px solid rgba(0, 198, 255, 0.3);
+    }
+    .btn-custom:hover { background: rgba(0, 198, 255, 0.25); transform: translateY(-2px); }
+
+    /* Custom Message Box Styling */
+    .message-box {
+      display: none;
+      margin-top: 15px;
+      animation: fadeIn 0.4s ease forwards;
+    }
+    textarea {
+      width: 100%;
+      height: 90px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 12px;
+      color: #ffffff;
+      font-size: 14px;
+      resize: none;
+      outline: none;
+      margin-bottom: 12px;
+    }
+    textarea::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .response-card { display: none; animation: popIn 0.5s ease forwards; }
+    .response-card .icon { font-size: 48px; margin-bottom: 15px; }
+    .response-card h2 { font-size: 24px; margin-bottom: 10px; color: #ffffff; }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.85); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-glow"></div>
+  <div class="bg-glow-2"></div>
+
+  <div class="card">
+    <div id="quiz-content">
+      <span class="badge">A MESSAGE FOR YOU</span>
+      <h1>I'm Really Sorry... ❤️</h1>
+      <p>I know I made a mistake, and I'm genuinely sorry for blocking you. I want to make things right and give us a fresh start. Will you meet me this Saturday?</p>
+      
+      <div class="btn-group">
+        <button type="button" class="btn-yes" onclick="submitChoice('YES')">Yes, let's meet ✨</button>
+        <button type="button" class="btn-thinking" onclick="submitChoice('THINKING')">Still thinking 🤔</button>
+        <button type="button" class="btn-no" onclick="submitChoice('NO')">Not this time 💭</button>
+        <button type="button" class="btn-custom" onclick="toggleMessageBox()">Send a custom message 💬</button>
+      </div>
+
+      <!-- Hidden Textbox Panel -->
+      <div id="custom-panel" class="message-box">
+        <textarea id="userMsg" placeholder="Type anything you want to say to me..."></textarea>
+        <button type="button" class="btn-yes" onclick="submitChoice('CUSTOM')">Send Message 💌</button>
+      </div>
+    </div>
+
+    <!-- Response Screens -->
+    <div id="msg-yes" class="response-card">
+      <div class="icon">🥰</div>
+      <h2>Thank You!</h2>
+      <p>I can't wait to see you this Saturday and make it up to you! ❤️</p>
+    </div>
+
+    <div id="msg-thinking" class="response-card">
+      <div class="icon">🤔</div>
+      <h2>Take Your Time</h2>
+      <p>No rush at all! Let me know whenever you're ready ❤️</p>
+    </div>
+
+    <div id="msg-no" class="response-card">
+      <div class="icon">🤍</div>
+      <h2>I Understand</h2>
+      <p>No problem at all! Take all the time you need. Next time ❤️</p>
+    </div>
+
+    <div id="msg-custom" class="response-card">
+      <div class="icon">💌</div>
+      <h2>Message Sent!</h2>
+      <p>Thank you for sharing your thoughts with me. I appreciate it ❤️</p>
+    </div>
+  </div>
+
+  <script>
+    function toggleMessageBox() {
+      const panel = document.getElementById('custom-panel');
+      panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function submitChoice(choice) {
+      // Put your exact ntfy topic name here:
+      const topic = 'my_secret_topic_1234';
+      
+      let notificationMessage = '';
+      let targetMessageId = '';
+
+      if (choice === 'YES') {
+        notificationMessage = 'She clicked YES! 🥰';
+        targetMessageId = 'msg-yes';
+      } else if (choice === 'THINKING') {
+        notificationMessage = 'She clicked STILL THINKING 🤔';
+        targetMessageId = 'msg-thinking';
+      } else if (choice === 'NO') {
+        notificationMessage = 'She clicked NO 💔';
+        targetMessageId = 'msg-no';
+      } else if (choice === 'CUSTOM') {
+        const text = document.getElementById('userMsg').value.trim();
+        notificationMessage = text ? `Custom Message: "${text}" 💌` : 'She sent an empty message 💬';
+        targetMessageId = 'msg-custom';
+      }
+
+      // Send instant push notification to your phone via ntfy.sh
+      fetch(`https://ntfy.sh/${topic}`, {
+        method: 'POST',
+        body: notificationMessage
+      }).catch(err => console.error(err));
+
+      // Display corresponding response UI to her
+      document.getElementById('quiz-content').style.display = 'none';
+      document.getElementById(targetMessageId).style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>

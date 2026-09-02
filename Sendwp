@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saturday Date? ❤️</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #ffe6e6;
+      padding: 50px 20px;
+    }
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      display: inline-block;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    h1 { color: #e6005c; }
+    button {
+      padding: 12px 25px;
+      margin: 10px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .btn-yes { background-color: #28a745; color: white; }
+    .btn-no { background-color: #dc3545; color: white; }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Hey! ❤️</h1>
+    <p>Are we meeting this Saturday?</p>
+    
+    <form action="YOUR_FORMSPREE_ENDPOINT" method="POST">
+      <button type="submit" name="answer" value="YES" class="btn-yes">Yes! 🥰</button>
+      <button type="submit" name="answer" value="NO" class="btn-no">No 😢</button>
+    </form>
+  </div>
+
+</body>
+</html>

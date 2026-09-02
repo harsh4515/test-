@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saturday Plan? ❤️</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .card {
+      background: #ffffff;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+    h1 {
+      color: #e6005c;
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+    p {
+      color: #555;
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 25px;
+    }
+    .btn-group {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+    button {
+      flex: 1;
+      padding: 14px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    button:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+    .btn-yes {
+      background-color: #28a745;
+      color: #ffffff;
+    }
+    .btn-no {
+      background-color: #6c757d;
+      color: #ffffff;
+    }
+    .response-message {
+      display: none;
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 15px;
+      animation: fadeIn 0.5s ease-in-out forwards;
+    }
+    .message-yes { color: #28a745; }
+    .message-no { color: #dc3545; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div id="quiz-content">
+      <h1>I'm Really Sorry... ❤️</h1>
+      <p>I know I made a mistake before. I've unblocked you, and I truly want to make things right. Will you meet me this Saturday?</p>
+      
+      <!-- Replace YOUR_FORMSPREE_ENDPOINT with your Formspree URL -->
+      <form id="responseForm" action="YOUR_FORMSPREE_ENDPOINT" method="POST">
+        <input type="hidden" name="answer" id="answerInput" value="">
+        <div class="btn-group">
+          <button type="button" class="btn-yes" onclick="submitChoice('YES')">Yes 🥰</button>
+          <button type="button" class="btn-no" onclick="submitChoice('NO')">No 💔</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="msg-yes" class="response-message message-yes">
+      Thank you! 🥰 Can't wait to see you!
+    </div>
+    <div id="msg-no" class="response-message message-no">
+      No problem! Next time ❤️
+    </div>
+  </div>
+
+  <script>
+    function submitChoice(choice) {
+      document.getElementById('answerInput').value = choice;
+      
+      const form = document.getElementById('responseForm');
+      const formData = new FormData(form);
+
+      // Send response quietly to your email via Formspree
+      if (form.action && !form.action.includes("YOUR_FORMSPREE_ENDPOINT")) {
+        fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+      }
+
+      // Hide question and show customized response instantly
+      document.getElementById('quiz-content').style.display = 'none';
+      if (choice === 'YES') {
+        document.getElementById('msg-yes').style.display = 'block';
+      } else {
+        document.getElementById('msg-no').style.display = 'block';
+      }
+    }
+  </script>
+
+</body>
+</html>
